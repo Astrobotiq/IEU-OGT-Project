@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    Vector2 mousePos;
+    [SerializeField]
+    InputMovement input;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,25 +20,34 @@ public class InputManager : MonoBehaviour
         
     }
 
-    public void onWalk(InputAction.CallbackContext context)
+    public void onWSAD(InputAction.CallbackContext context)
     {
         var value = context.ReadValue<Vector2>();
-        
+        input.WSAD(value);
+        Debug.Log(value);
     }
 
     public void onE(InputAction.CallbackContext context)
     {
-
+        input.E();
     }
 
     public void onMouse(InputAction.CallbackContext context)
     {
-        var value =context.ReadValue<Vector2>();
+
+        mousePos =context.ReadValue<Vector2>();
+        input.MousePos(mousePos);
     }
 
     public void onMouseLeft(InputAction.CallbackContext context)
     {
-        var value = context.ReadValue<Vector2>();
-        Debug.Log(value);
+        if (context.performed)
+        {
+            if(mousePos != null)
+            {
+                Debug.Log(mousePos);
+                input.MouseLeft(mousePos);
+            }
+        }
     }
 }
