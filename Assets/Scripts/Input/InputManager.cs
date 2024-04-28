@@ -45,7 +45,6 @@ public class InputManager : MonoBehaviour
         {
             if(mousePos != null)
             {
-                Debug.Log(mousePos);
                 input.MouseLeft(mousePos);
             }
         }

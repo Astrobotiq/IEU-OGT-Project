@@ -10,10 +10,12 @@ public class InputMovement : MonoBehaviour
     float speed;
     _Interactable interactable;
     _Hoverable hoverable;
+    Camera mainCamera;
+    public LayerMask mask;
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -41,40 +43,41 @@ public class InputMovement : MonoBehaviour
 
     public virtual void MousePos(Vector2 pos) 
     {
-        Vector2 worldPos = Camera.main.WorldToScreenPoint(pos);
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(worldPos);
-
-        if (Physics.Raycast(ray, out hit))
+        RaycastHit2D hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(pos));
+        
+        if(hit.collider != null)
         {
-            Debug.DrawRay(Camera.main.transform.position,ray.direction,Color.red);
-            if(hit.collider != null)
+            if (hit.collider.gameObject.GetComponent<_Hoverable>() != null)
             {
-                Debug.Log("Hittt colliderrr");
-                Collider collider = hit.collider;
-                if (collider.gameObject.GetComponent<_Hoverable>() != null)
+                if(hoverable != null)
                 {
-                    Debug.Log("Hoverable bulundu");
-                    if(collider.gameObject.GetComponent<_Hoverable>() != hoverable)
+                    if(hit.collider.GetComponent<_Hoverable>() != hoverable)
                     {
                         hoverable.onHoverEnd();
-                        hoverable = collider.gameObject.GetComponent<_Hoverable>();
+                        hoverable = hit.collider.GetComponent<_Hoverable>();
                         hoverable.onHover();
                     }
-
                 }
-                else if (collider.gameObject.GetComponent<_Hoverable>()==null && hoverable != null)
+                else if (hoverable == null)
                 {
-                    hoverable.onHoverEnd();
-                    hoverable = null;
+                    hoverable = hit.collider.GetComponent<_Hoverable>();
+                    hoverable.onHover();
                 }
             }
+            else if (hit.collider.gameObject.GetComponent<_Hoverable>() == null)
+            {
+                hoverable.onHoverEnd();
+                hoverable = null;
+            }
         }
+        
+
     }
 
     public virtual void MouseLeft(Vector2 pos)
     {
-        // will do select thing
+        Vector2 mousePos = mainCamera.ScreenToWorldPoint(pos);
+        Debug.Log(mousePos);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
