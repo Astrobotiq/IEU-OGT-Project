@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class InputMovement : MonoBehaviour
 {
-    [SerializeField]
-    Rigidbody2D rb;
-    [SerializeField]
-    float speed;
+    private Rigidbody2D rb;
+    private float speed;
     _Interactable interactable;
     _Hoverable hoverable;
-    Camera mainCamera;
-    public LayerMask mask;
+    private Camera mainCamera;
+    [SerializeField]
+    public InputMovement otherManager;
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
+        rb = GetComponent<Rigidbody2D>();
+        speed = 2f;
     }
 
     // Update is called once per frame
@@ -78,6 +79,17 @@ public class InputMovement : MonoBehaviour
     {
         Vector2 mousePos = mainCamera.ScreenToWorldPoint(pos);
         Debug.Log(mousePos);
+    }
+
+    public virtual void MouseRight(Vector2 pos)
+    {
+
+    }
+
+    public virtual InputMovement ESC()
+    {
+        //Open UI and change InputMovement to InputUI
+        return otherManager;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

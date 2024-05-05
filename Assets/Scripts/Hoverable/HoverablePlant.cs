@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class HoverablePlant : _Hoverable
 {
-    [SerializeField] GameObject hoverUI;
+    [SerializeField] TooltipManager tooltipManager;
+    [SerializeField] Plant plant;
+    string plantHeader;
+    string plantContent;
+
+    private void Awake()
+    {
+        plant = GetComponent<Plant>();
+        plantHeader = plant.getHeader();
+        plantContent = plant.getContent();
+    }
     public override void onHover()
     {
-        if (hoverUI != null)
+        
+        if (tooltipManager != null)
         {
-            hoverUI.SetActive(true);
+            
+            tooltipManager.show(plantContent,transform.position,plantHeader);
         }
     }
 
     public override void onHoverEnd()
     {
-        if(hoverUI != null)
+        if(tooltipManager != null)
         {
-            hoverUI.SetActive(false);
+            tooltipManager.hide();
         }
     }
 }

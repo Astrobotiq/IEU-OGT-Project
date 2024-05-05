@@ -49,4 +49,27 @@ public class InputManager : MonoBehaviour
             }
         }
     }
+
+    public void onMouseRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            
+        }
+    }
+
+    public void onESC(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("ESC'ye basýldý");
+            changeInputMovement(input.ESC());
+        }
+    }
+
+    public void changeInputMovement(InputMovement inputMov)
+    {
+        input = inputMov;
+        Debug.Log(input.name);
+    }
 }
