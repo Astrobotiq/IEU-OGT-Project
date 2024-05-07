@@ -6,6 +6,6 @@ public class PlantInteractable : _Interactable
 {
     public override void onInteract()
     {
-        Debug.Log("Plant topladýn");
+        Debug.Log("Plant topladÄ±n");
     }
 }
