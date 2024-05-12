@@ -11,6 +11,8 @@ public class InputMovement : MonoBehaviour
     private Camera mainCamera;
     [SerializeField]
     public InputMovement otherManager;
+    public WandSO leftClick;
+    public WandSO rightClick;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,8 +69,11 @@ public class InputMovement : MonoBehaviour
             }
             else if (hit.collider.gameObject.GetComponent<_Hoverable>() == null)
             {
-                hoverable.onHoverEnd();
-                hoverable = null;
+                if(hoverable != null)
+                {
+                    hoverable.onHoverEnd();
+                    hoverable = null;
+                }
             }
         }
         
@@ -79,11 +84,30 @@ public class InputMovement : MonoBehaviour
     {
         Vector2 mousePos = mainCamera.ScreenToWorldPoint(pos);
         Debug.Log(mousePos);
+        if(leftClick != null)
+        {
+            Debug.Log("scriptable object burada");
+            leftClick.onUse(transform.position, mousePos);
+        }
+        else if(leftClick == null)
+        {
+            Debug.Log("scriptable object burada deðil");
+        }
     }
 
     public virtual void MouseRight(Vector2 pos)
     {
-
+        Vector2 mousePos = mainCamera.ScreenToWorldPoint(pos);
+        Debug.Log(mousePos);
+        if (rightClick != null)
+        {
+            Debug.Log("scriptable object burada");
+            rightClick.onUse(transform.position, mousePos);
+        }
+        else if (rightClick == null)
+        {
+            Debug.Log("scriptable object burada deðil");
+        }
     }
 
     public virtual InputMovement ESC()

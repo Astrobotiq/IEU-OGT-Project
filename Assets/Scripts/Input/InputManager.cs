@@ -34,9 +34,12 @@ public class InputManager : MonoBehaviour
 
     public void onMouse(InputAction.CallbackContext context)
     {
-
-        mousePos =context.ReadValue<Vector2>();
-        input.MousePos(mousePos);
+        if (context.performed)
+        {
+            mousePos = context.ReadValue<Vector2>();
+            input.MousePos(mousePos);
+        }
+        
     }
 
     public void onMouseLeft(InputAction.CallbackContext context)
@@ -54,7 +57,7 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
         {
-            
+            input.MouseRight(mousePos);
         }
     }
 

@@ -11,4 +11,9 @@ public class PlantSO : ScriptableObject
 
     public GameObject meyve;
     public List<Sprite> sprites;
+
+    public Sprite getSprite(int index)
+    {
+        return sprites[index];
+    }
 }
