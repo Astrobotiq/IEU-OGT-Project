@@ -15,4 +15,5 @@ MonoBehaviour:
   name: GroundShaker
   description: Shake the ground and create soil
   amount: 3
-  Tile: {fileID: 11400000, guid: 70042cbc96c7b804daa87bb57accc850, type: 2}
+  TileSoil: {fileID: 11400000, guid: 70042cbc96c7b804daa87bb57accc850, type: 2}
+  TileGrass: {fileID: 11400000, guid: 55105b7801739dc4e854efe70c4360f6, type: 2}

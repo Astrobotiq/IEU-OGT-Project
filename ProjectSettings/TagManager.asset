@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Soil
   - Vegetable
+  - ToolTip
+  - GridManager
   layers:
   - Default
   - TransparentFX

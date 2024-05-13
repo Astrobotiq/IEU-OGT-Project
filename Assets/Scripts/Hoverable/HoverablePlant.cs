@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class HoverablePlant : _Hoverable
 {
-    [SerializeField] TooltipManager tooltipManager;
+    TooltipManager tooltipManager;
     [SerializeField] Plant plant;
     string plantHeader;
     string plantContent;
 
     private void Awake()
     {
+        GameObject tooltipGO = GameObject.FindWithTag("ToolTip");
+        tooltipManager = tooltipGO.GetComponent<TooltipManager>();
         plant = GetComponent<Plant>();
-        plantHeader = plant.getHeader();
-        plantContent = plant.getContent();
+        if (plant != null)
+        {
+            if(plant.getHeader()!= null || plant.getContent() != null)
+            {
+                plantHeader = plant.getHeader();
+                plantContent = plant.getContent();
+            }
+        }
     }
     public override void onHover()
     {

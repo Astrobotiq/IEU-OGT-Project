@@ -15,4 +15,5 @@ MonoBehaviour:
   name: ItemThrower
   description: Throws the item in it
   amount: 0
+  ruleTile: {fileID: 11400000, guid: 70042cbc96c7b804daa87bb57accc850, type: 2}
   plantSO: {fileID: 11400000, guid: 4c4253782ad171e46a01817e5a2b9fca, type: 2}

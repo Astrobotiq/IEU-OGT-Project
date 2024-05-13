@@ -6,7 +6,18 @@ public class Plant : MonoBehaviour
 {
     //this class will do general things for our plant. hold information (it will probably have a scriptable object in it). 
     public PlantSO plantInfo;
-    public GameObject plant;
+    public SpriteRenderer plant;
+    GridManager gridManager;
+
+    private void Awake()
+    {
+        GameObject go = GameObject.FindWithTag("GridManager");
+    }
+
+    IEnumerator timer()
+    {
+        yield return new WaitForSeconds(5);
+    }
 
     public string getHeader()
     {
@@ -23,6 +34,7 @@ public class Plant : MonoBehaviour
 
     public void setPlant(PlantSO plantSO)
     {
+        Debug.Log("Plant geldi: " + plantSO.name);
         if(plantInfo != null)
         {
             Debug.Log("This tile already planted");
@@ -36,7 +48,6 @@ public class Plant : MonoBehaviour
 
     public void showPlant(Sprite sprite)
     {
-        plant.SetActive(true);
-        plant.GetComponent<SpriteRenderer>().sprite = sprite;
+        plant.sprite = sprite;
     }
 }
